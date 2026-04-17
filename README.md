@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=300&section=header&text=Welcom%20My%20%20GitHub&fontSize=70&animation=fadeIn" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF6EB4,50:A78BFA,100:67E8F9&height=300&section=header&text=Welcom%20to%20My%20%20GitHub&fontSize=70&animation=fadeIn&fontColor=FFFFFF" />
 
   <a href="https://www.gitanimals.org/en_US?utm_medium=image&utm_source=sanggyoon&utm_content=line">
     <img
