@@ -126,10 +126,8 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
     j2 = useRef<any>(null!),
     j3 = useRef<any>(null!),
     card = useRef<any>(null!);
-  const vec = new THREE.Vector3(),
-    ang = new THREE.Vector3(),
-    rot = new THREE.Vector3(),
-    dir = new THREE.Vector3();
+  const ang = new THREE.Vector3(),
+    rot = new THREE.Vector3();
   const segmentProps = {
     type: 'dynamic' as const,
     canSleep: true,
@@ -150,7 +148,6 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
         new THREE.Vector3(),
       ]),
   );
-  const [dragged, drag] = useState<THREE.Vector3 | false>(false);
   const [hovered, hover] = useState(false);
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
@@ -163,23 +160,33 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
 
   useEffect(() => {
     if (hovered) {
-      document.body.style.cursor = dragged ? 'grabbing' : 'grab';
+      document.body.style.cursor = 'pointer';
       return () => void (document.body.style.cursor = 'auto');
     }
-  }, [hovered, dragged]);
+  }, [hovered]);
 
-  useFrame((state, delta) => {
-    if (dragged) {
-      vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
-      dir.copy(vec).sub(state.camera.position).normalize();
-      vec.add(dir.multiplyScalar(state.camera.position.length()));
-      [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
-      card.current?.setNextKinematicTranslation({
-        x: vec.x - (dragged as THREE.Vector3).x,
-        y: vec.y - (dragged as THREE.Vector3).y,
-        z: vec.z - (dragged as THREE.Vector3).z,
-      });
-    }
+  const handleClick = () => {
+    if (!card.current) return;
+    card.current.wakeUp();
+    card.current.applyImpulse(
+      {
+        x: (Math.random() - 0.5) * 6,
+        y: Math.random() * 3 + 2,
+        z: (Math.random() - 0.5) * 3,
+      },
+      true,
+    );
+    card.current.applyTorqueImpulse(
+      {
+        x: (Math.random() - 0.5) * 2,
+        y: (Math.random() - 0.5) * 2,
+        z: (Math.random() - 0.5) * 2,
+      },
+      true,
+    );
+  };
+
+  useFrame((_state, delta) => {
     if (fixed.current) {
       [j1, j2].forEach((ref) => {
         if (!ref.current.lerped)
@@ -228,7 +235,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
           position={[2, 0, 0]}
           ref={card}
           {...segmentProps}
-          type={dragged ? 'kinematicPosition' : 'dynamic'}
+          type="dynamic"
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
@@ -236,18 +243,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
-            onPointerUp={(e) => (
-              (e.target as Element).releasePointerCapture(e.pointerId),
-              drag(false)
-            )}
-            onPointerDown={(e) => (
-              (e.target as Element).setPointerCapture(e.pointerId),
-              drag(
-                new THREE.Vector3()
-                  .copy(e.point)
-                  .sub(vec.copy(card.current.translation())),
-              )
-            )}
+            onClick={handleClick}
           >
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial
