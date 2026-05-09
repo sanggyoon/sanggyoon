@@ -20,19 +20,7 @@ export default function BottomNav() {
   };
 
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        display: 'flex',
-        zIndex: 100,
-        borderTop: '1px solid rgba(255,255,255,0.15)',
-        backdropFilter: 'blur(12px)',
-        backgroundColor: 'rgba(0,0,0,0.6)',
-      }}
-    >
+    <nav className="fixed bottom-0 left-0 right-0 flex z-50 border-t border-white/15 backdrop-blur-md bg-black/60">
       {navItems.map((item) => {
         const isActive = pathname === item.href;
         return (
@@ -40,18 +28,16 @@ export default function BottomNav() {
             key={item.href}
             href={item.href}
             onClick={(e) => handleClick(e, item.href)}
-            style={{
-              flex: 1,
-              padding: '16px 8px',
-              textAlign: 'center',
-              fontSize: '0.7rem',
-              fontFamily: 'var(--font-geist-mono)',
-              letterSpacing: '0.1em',
-              color: isActive ? '#ffffff' : 'rgba(255,255,255,0.4)',
-              borderTop: isActive ? '2px solid #ffffff' : '2px solid transparent',
-              textDecoration: 'none',
-              transition: 'color 0.2s, border-color 0.2s',
-            }}
+            className={`
+              flex flex-1 items-center justify-center
+              px-2 py-4 min-h-[56px]
+              text-[0.65rem] tracking-[0.1em] font-mono
+              border-t-2 transition-colors duration-200 no-underline
+              ${isActive
+                ? 'text-white border-white'
+                : 'text-white/40 border-transparent hover:text-white'
+              }
+            `}
           >
             {item.label}
           </Link>

@@ -125,7 +125,8 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
     j1 = useRef<any>(null!),
     j2 = useRef<any>(null!),
     j3 = useRef<any>(null!),
-    card = useRef<any>(null!);
+    card = useRef<any>(null!),
+    cardGroup = useRef<THREE.Group>(null!);
   const ang = new THREE.Vector3(),
     rot = new THREE.Vector3();
   const segmentProps = {
@@ -187,6 +188,13 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   };
 
   useFrame((_state, delta) => {
+    if (cardGroup.current) {
+      const targetScale = hovered ? 2.1 : 2.25;
+      const s = THREE.MathUtils.lerp(cardGroup.current.scale.x, targetScale, 0.1);
+      cardGroup.current.scale.setScalar(s);
+      // top 고정: scale 줄어들수록 position.y를 올려서 상단 위치 유지
+      cardGroup.current.position.y = -1.2 + 1.125 * (2.25 - s);
+    }
     if (fixed.current) {
       [j1, j2].forEach((ref) => {
         if (!ref.current.lerped)
@@ -239,6 +247,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
+            ref={cardGroup}
             scale={2.25}
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
