@@ -1,12 +1,6 @@
 'use client';
-
-// 임포트
 import { useRef } from 'react';
 
-// 모듈 스타일
-// import styles from './page.module.css';
-
-// react bits 컴포넌트 가져오기
 import Lanyard from '@/components/Lanyard';
 import LightRays from '@/components/LightRays';
 import VariableProximity from '@/components/VariableProximity';
@@ -42,9 +36,7 @@ export default function Home() {
         }}
       >
         <VariableProximity
-          label={
-            'Hover me! And then star React Bits on GitHub, or else... l;askdfjl;sadkfj;llakfsd'
-          }
+          label={'Hello, World!'}
           style={{
             fontSize: '3rem', // 큰 폰트 크기 추가
             fontWeight: 400,

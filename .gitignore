@@ -1,0 +1,42 @@
+# 환경변수
+.env
+.env*
+
+# 임시 파일들
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+
+# OS 생성 파일들
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE 설정 파일들
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# 백업 폴더들
+backup_*/
+temp/
+
+# 로그 파일들
+*.log
+
+# 캐시 파일들
+.cache/
+cache/
+
+# Node.js (필요시)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
