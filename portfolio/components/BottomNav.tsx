@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 const navItems = [
-  { label: 'PERSONAL INFO', href: '/personal-info' },
+  { label: 'ABOUT ME', href: '/personal-info' },
   { label: 'PORTFOLIO', href: '/portfolio' },
-  { label: 'TIMELINE SUMMARY', href: '/timeline' },
+  { label: 'TIMELINE', href: '/timeline' },
 ];
 
 export default function BottomNav() {
@@ -31,11 +31,12 @@ export default function BottomNav() {
             className={`
               flex flex-1 items-center justify-center
               px-2 py-4 min-h-[56px]
-              text-[0.65rem] tracking-[0.1em] font-mono
+              text-[0.65rem] tracking-[0.1em] font-mono text-center
               border-t-2 transition-colors duration-200 no-underline
-              ${isActive
-                ? 'text-white border-white'
-                : 'text-white/40 border-transparent hover:text-white'
+              ${
+                isActive
+                  ? 'text-white border-white'
+                  : 'text-white/40 border-transparent hover:text-white'
               }
             `}
           >

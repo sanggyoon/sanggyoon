@@ -3,13 +3,13 @@ import { useRef } from 'react';
 
 import Lanyard from '@/components/Lanyard';
 import LightRays from '@/components/LightRays';
-import VariableProximity from '@/components/VariableProximity';
+import Shuffle from '@/components/Shuffle';
 
 export default function Home() {
   const containerRef = useRef(null);
 
   return (
-    <>
+    <div style={{ position: 'relative', height: '100dvh', overflow: 'hidden' }}>
       <LightRays
         raysOrigin="top-center"
         raysColor="#ffffffff"
@@ -28,28 +28,30 @@ export default function Home() {
         ref={containerRef}
         style={{
           position: 'relative',
-          minHeight: '100vh', // 전체 화면 높이
-          padding: '50px', // 충분한 패딩
+          height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          paddingBottom: '56px',
+          zIndex: 2,
         }}
       >
-        <VariableProximity
-          label={'Hello, World!'}
-          style={{
-            fontSize: '3rem', // 큰 폰트 크기 추가
-            fontWeight: 400,
-            lineHeight: 1.2,
-          }}
-          className="variable-proximity"
-          fromFontVariationSettings="'wght' 400, 'opsz' 9"
-          toFontVariationSettings="'wght' 1000, 'opsz' 40"
-          containerRef={containerRef}
-          radius={100}
-          falloff="linear"
+        <Shuffle
+          text="Hello World"
+          shuffleDirection="right"
+          duration={0.35}
+          animationMode="evenodd"
+          shuffleTimes={1}
+          ease="power3.out"
+          stagger={0.03}
+          threshold={0.1}
+          triggerOnce={false}
+          triggerOnHover
+          respectReducedMotion={true}
+          loop={false}
+          loopDelay={0}
         />
       </div>
-    </>
+    </div>
   );
 }
