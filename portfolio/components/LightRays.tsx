@@ -84,6 +84,7 @@ const LightRays = ({
   className = '',
 }: LightRaysProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
   const uniformsRef = useRef<Record<string, { value: number | number[] }> | null>(null);
   const rendererRef = useRef<Renderer | null>(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
@@ -283,6 +284,7 @@ void main() {
 
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
         renderer.setSize(wCSS, hCSS);
+        rectRef.current = containerRef.current.getBoundingClientRect();
 
         const dpr = renderer.dpr;
         const w = wCSS * dpr;
@@ -425,11 +427,12 @@ void main() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current || !rendererRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      mouseRef.current = { x, y };
+      const rect = rectRef.current;
+      if (!rect || !rendererRef.current) return;
+      mouseRef.current = {
+        x: (e.clientX - rect.left) / rect.width,
+        y: (e.clientY - rect.top) / rect.height,
+      };
     };
 
     if (followMouse) {

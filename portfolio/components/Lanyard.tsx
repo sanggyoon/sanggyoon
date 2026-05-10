@@ -149,6 +149,9 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
         new THREE.Vector3(),
       ]),
   );
+  const pointsBuffer = useState(() =>
+    Array.from({ length: 33 }, () => new THREE.Vector3()),
+  )[0];
   const [hovered, hover] = useState(false);
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
@@ -214,8 +217,12 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
       curve.points[1].copy(j2.current.lerped);
       curve.points[2].copy(j1.current.lerped);
       curve.points[3].copy(fixed.current.translation());
+      const count = isMobile ? 16 : 32;
+      for (let i = 0; i <= count; i++) {
+        curve.getPoint(i / count, pointsBuffer[i]);
+      }
       (band.current.geometry as any).setPoints(
-        curve.getPoints(isMobile ? 16 : 32),
+        pointsBuffer.slice(0, count + 1),
       );
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());

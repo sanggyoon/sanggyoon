@@ -3,7 +3,7 @@ import { useRef } from 'react';
 
 import Lanyard from '@/components/Lanyard';
 import LightRays from '@/components/LightRays';
-import Shuffle from '@/components/Shuffle';
+// import Shuffle from '@/components/Shuffle';
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -24,7 +24,7 @@ export default function Home() {
       />
       <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
 
-      <div
+      {/* <div
         ref={containerRef}
         style={{
           position: 'relative',
@@ -34,6 +34,7 @@ export default function Home() {
           justifyContent: 'center',
           paddingBottom: '56px',
           zIndex: 2,
+          pointerEvents: 'none',
         }}
       >
         <Shuffle
@@ -51,7 +52,7 @@ export default function Home() {
           loop={false}
           loopDelay={0}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
