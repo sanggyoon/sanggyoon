@@ -6,6 +6,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(1);
+  transform: scale(1) translateY(-8%);
   transform-origin: center;
 }
