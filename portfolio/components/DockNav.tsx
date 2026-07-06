@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { Home, User, Briefcase, Clock } from 'lucide-react';
 import Dock, { DockItemData } from '@/components/Dock';
+import { useDeckTheme } from '@/components/DeckTheme';
 
 const navItems = [
   { label: 'HOME', href: '/', icon: <Home size={24} /> },
@@ -14,6 +15,12 @@ const navItems = [
 export default function DockNav() {
   const pathname = usePathname();
   const router = useRouter();
+  const { dark: deckDark } = useDeckTheme();
+
+  // Home ('/') has a dark background and no deck theme toggle, so the dock
+  // always reads dark there; deck pages follow the deck's own light/dark toggle.
+  const dark = pathname === '/' ? true : deckDark;
+  const activeBorder = dark ? '!border-white' : '!border-[#0F766E]';
 
   const items: DockItemData[] = navItems.map((item) => ({
     icon: item.icon,
@@ -21,12 +28,18 @@ export default function DockNav() {
     onClick: () => {
       router.push(item.href);
     },
-    className: pathname === item.href ? 'border-white' : '',
+    className: pathname === item.href ? activeBorder : '',
   }));
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center">
-      <Dock items={items} baseItemSize={60} magnification={90} panelHeight={80} />
+      <Dock
+        items={items}
+        dark={dark}
+        baseItemSize={60}
+        magnification={90}
+        panelHeight={80}
+      />
     </div>
   );
 }

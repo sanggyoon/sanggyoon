@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import DockNav from "@/components/DockNav";
 import PageTransition from "@/components/PageTransition";
+import { DeckThemeProvider } from "@/components/DeckTheme";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,8 +31,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
       <body className="min-h-full flex flex-col bg-black">
-        <PageTransition>{children}</PageTransition>
-        <DockNav />
+        <DeckThemeProvider>
+          <PageTransition>{children}</PageTransition>
+          <DockNav />
+        </DeckThemeProvider>
       </body>
     </html>
   );
