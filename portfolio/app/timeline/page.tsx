@@ -41,11 +41,6 @@ export default function Timeline() {
             <div className="t">뉴노멀 · ATD</div>
             <div className="r">🏆 인재상 · 대기오염 시각화</div>
           </div>
-          <div className="tl">
-            <div className="d">2025.07</div>
-            <div className="t">리눅스 마스터 2급</div>
-            <div className="r">자격증 · KAIT</div>
-          </div>
           <div className="tl flag">
             <div className="d">2025.09–10</div>
             <div className="t">지존소프트 인턴</div>
@@ -65,6 +60,11 @@ export default function Timeline() {
             <div className="d">2026.03</div>
             <div className="t">SQLD</div>
             <div className="r">자격증 · K-DATA</div>
+          </div>
+          <div className="tl">
+            <div className="d">2026.07</div>
+            <div className="t">리눅스 마스터 2급</div>
+            <div className="r">자격증 · KAIT</div>
           </div>
         </div>
       </div>
