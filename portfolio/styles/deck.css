@@ -353,6 +353,9 @@
   text-decoration: none; color: var(--ink); transition: border-color .15s, transform .15s;
 }
 .deck .contact-row:hover, .deck .contact-row:focus-visible { border-color: var(--accent); transform: translateX(3px); outline: none; }
+/* display-only row (e.g. KakaoTalk ID) — no link, so no hover motion */
+.deck .contact-row.static { cursor: default; }
+.deck .contact-row.static:hover { border-color: var(--line); transform: none; }
 .deck .contact-row .ci { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 11px; background: var(--accent-tint); color: var(--accent-ink); flex: 0 0 auto; }
 .deck .contact-row .cmeta { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
 .deck .contact-row .cl { font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }

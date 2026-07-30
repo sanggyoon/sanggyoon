@@ -1,9 +1,17 @@
 import { Fragment } from 'react';
-import { Mail, Rss, Briefcase } from 'lucide-react';
+import { Mail, Rss, MessageCircle } from 'lucide-react';
 import SlideDeck from '@/components/deck/SlideDeck';
 import { GithubIcon, LinkedinIcon } from '@/components/deck/BrandIcons';
 
-const links = [
+type ContactLink = {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  /** external/mailto link; omitted for display-only rows (e.g. KakaoTalk ID) */
+  href?: string;
+};
+
+const links: ContactLink[] = [
   {
     icon: <Mail size={22} />,
     label: 'Email',
@@ -23,16 +31,15 @@ const links = [
     href: 'https://velog.io/@sanggyoon/posts',
   },
   {
-    icon: <Briefcase size={22} />,
-    label: 'Wanted',
-    value: '원티드 프로필',
-    href: 'https://social.wanted.co.kr/community/profile/UvvemmQYYBX56cgs2y46Vw?pageType=profile',
-  },
-  {
     icon: <LinkedinIcon size={22} />,
     label: 'LinkedIn',
     value: 'sanggyoon-kim',
     href: 'https://www.linkedin.com/in/sanggyoon-kim-a5b2a82b7/',
+  },
+  {
+    icon: <MessageCircle size={22} />,
+    label: 'KakaoTalk ID',
+    value: 'tkdrbs518',
   },
 ];
 
@@ -44,25 +51,38 @@ export default function Contact() {
       </div>
       <h1 className="head">언제든 편하게 연락 주세요</h1>
       <div className="contact-list">
-        {links.map((l) => (
-          <a
-            key={l.label}
-            href={l.href}
-            target={l.href.startsWith('mailto:') ? undefined : '_blank'}
-            rel="noopener"
-            className="contact-row"
-          >
-            <span className="ci">{l.icon}</span>
-            <span className="cmeta">
-              <span className="cl">{l.label}</span>
-              <span className="cv">{l.value}</span>
-            </span>
-            <span className="carrow">↗</span>
-          </a>
-        ))}
+        {links.map((l) => {
+          const inner = (
+            <>
+              <span className="ci">{l.icon}</span>
+              <span className="cmeta">
+                <span className="cl">{l.label}</span>
+                <span className="cv">{l.value}</span>
+              </span>
+              {l.href ? <span className="carrow">↗</span> : null}
+            </>
+          );
+          return l.href ? (
+            <a
+              key={l.label}
+              href={l.href}
+              target={l.href.startsWith('mailto:') ? undefined : '_blank'}
+              rel="noopener"
+              className="contact-row"
+            >
+              {inner}
+            </a>
+          ) : (
+            <div key={l.label} className="contact-row static">
+              {inner}
+            </div>
+          );
+        })}
       </div>
     </Fragment>,
   ];
 
-  return <SlideDeck slides={slides} labels={['Contact']} variants={['contact']} />;
+  return (
+    <SlideDeck slides={slides} labels={['Contact']} variants={['contact']} />
+  );
 }
