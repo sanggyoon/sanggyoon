@@ -10,7 +10,7 @@ type LightboxProps = {
 };
 
 /** Full-screen zoom overlay for architecture images. Rendered on demand. */
-export default function Lightbox({ src, alt, caption, onClose }: LightboxProps) {
+export default function Lightbox({ src, alt, onClose }: LightboxProps) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -27,13 +27,14 @@ export default function Lightbox({ src, alt, caption, onClose }: LightboxProps) 
       aria-label={alt}
       onClick={onClose}
     >
-      <button className="lb-close" aria-label="닫기" onClick={onClose}>
-        ✕
-      </button>
       {/* stop propagation so clicking the image itself doesn't close */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} onClick={(e) => e.stopPropagation()} />
-      {caption ? <div className="lb-cap">{caption}</div> : null}
+      <div className="lb-frame" onClick={(e) => e.stopPropagation()}>
+        <button className="lb-close" aria-label="닫기" onClick={onClose}>
+          ✕
+        </button>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={alt} />
+      </div>
     </div>
   );
 }
