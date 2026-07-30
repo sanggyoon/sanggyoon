@@ -1,12 +1,9 @@
 'use client';
-import { useRef } from 'react';
 
 import Lanyard from '@/components/Lanyard';
 import LightRays from '@/components/LightRays';
 
 export default function Home() {
-  const containerRef = useRef(null);
-
   return (
     <div style={{ position: 'relative', height: '100dvh', overflow: 'hidden' }}>
       <LightRays

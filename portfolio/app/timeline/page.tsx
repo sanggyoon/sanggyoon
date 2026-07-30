@@ -1,36 +1,20 @@
 import { Fragment } from 'react';
 import SlideDeck from '@/components/deck/SlideDeck';
 
-const contacts = (
-  <div className="contacts" style={{ alignContent: 'start' }}>
-    <a href="mailto:sangreal4262@gmail.com">
-      <span className="lb">✉</span> sangreal4262@gmail.com
-    </a>
-    <a
-      href="https://github.com/sanggyoon/202605_KakaoCloud_AIaaS"
-      target="_blank"
-      rel="noopener"
-    >
-      <span className="lb">GitHub</span> sanggyoon
-    </a>
-    <a href="https://velog.io/@sanggyoon/posts" target="_blank" rel="noopener">
-      <span className="lb">Blog</span> velog.io/@sanggyoon
-    </a>
-  </div>
-);
-
 export default function Timeline() {
   const slides = [
-    // 9. TIMELINE
+    // 경험 타임라인 + 자격·수상 — 하나의 스크롤 페이지
     <Fragment key="timeline">
       <div className="eyebrow">
         <span className="sec">Experience Timeline</span>
       </div>
       <h1 className="head">2024 → 2026, 하나의 성장선</h1>
       <p className="lead">
-        7개 경험 중 <b style={{ color: 'var(--accent-ink)' }}>간판 3개</b>가 홈서버 → 기업 →
-        클라우드의 축을 이룹니다.
+        7개 경험 중{' '}
+        <b style={{ color: 'var(--accent-ink)' }}>간판 3개</b>가 홈서버 → 기업 →
+        클라우드의 축을 이룹니다. (◆ = 간판 3개, 겹치는 활동은 시작일 기준)
       </p>
+
       <div className="timeline">
         <div className="tl-line">
           <div className="tl">
@@ -70,15 +54,15 @@ export default function Timeline() {
           </div>
         </div>
       </div>
-      <p className="note">◆ 표시 = 간판 3개. 시기가 겹치는 활동은 시작일 기준으로 배열.</p>
-    </Fragment>,
 
-    // 10. CERTS & AWARDS
-    <Fragment key="certs">
-      <div className="eyebrow">
+      <div className="eyebrow" style={{ marginTop: 10 }}>
         <span className="sec">Certifications &amp; Awards</span>
       </div>
-      <h1 className="head">이론은 자격증으로, 실무는 수상으로 검증했습니다</h1>
+      <p className="lead">
+        <b>AWS CCP + SQLD + 리눅스 마스터</b> 조합이 클라우드/인프라 타깃과 직결.
+        실무 성과는 <b>최우수상 · 인재상</b>으로 확인. 다음 목표는 <b>CKA / CKAD</b>.
+      </p>
+
       <div className="grid3">
         <div className="cert">
           <div className="cn">AWS CCP</div>
@@ -101,6 +85,7 @@ export default function Timeline() {
           <div className="cx">AutoML 기반 데이터 분석·모델링</div>
         </div>
       </div>
+
       <div className="award-row">
         <div className="award">
           <div className="aw">🏆 최우수상</div>
@@ -111,43 +96,8 @@ export default function Timeline() {
           <div className="as">뉴노멀 · ATD Korea 협력</div>
         </div>
       </div>
-      <p className="note">
-        <b>AWS CCP(클라우드) + SQLD(데이터) + 리눅스 마스터(OS 운영)</b> 조합이 클라우드/인프라
-        타깃과 직결. 다음 목표는 CKA/CKAD.
-      </p>
-    </Fragment>,
-
-    // 11. CLOSING
-    <Fragment key="closing">
-      <div className="thanks">Closing</div>
-      <div className="cover-rule" />
-      <h1>
-        말이 통하는
-        <br />
-        인프라 개발자가 되겠습니다
-      </h1>
-      <div className="cols" style={{ alignItems: 'start', marginTop: 6 }}>
-        <ul className="pts">
-          <li>
-            전공자·비전공자 모두에게 <b>쉽게 설명하고, 의도를 정확히 파악</b>하는 개발자.
-          </li>
-          <li>
-            장애 앞에서 <b>침착하게, 근본 원인까지, 재발은 자동화로.</b>
-          </li>
-        </ul>
-        {contacts}
-      </div>
-      <p className="thanks" style={{ marginTop: 10 }}>
-        감사합니다.
-      </p>
     </Fragment>,
   ];
 
-  return (
-    <SlideDeck
-      slides={slides}
-      labels={['경험 타임라인', '자격증 수상', 'Closing']}
-      variants={['', '', 'closing']}
-    />
-  );
+  return <SlideDeck slides={slides} labels={['Timeline']} />;
 }

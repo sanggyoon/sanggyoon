@@ -4,6 +4,7 @@ import "./globals.css";
 import DockNav from "@/components/DockNav";
 import PageTransition from "@/components/PageTransition";
 import { DeckThemeProvider } from "@/components/DeckTheme";
+import { DeckNavProvider } from "@/components/DeckNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,8 +33,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-black">
         <DeckThemeProvider>
-          <PageTransition>{children}</PageTransition>
-          <DockNav />
+          <DeckNavProvider>
+            <PageTransition>{children}</PageTransition>
+            <DockNav />
+          </DeckNavProvider>
         </DeckThemeProvider>
       </body>
     </html>

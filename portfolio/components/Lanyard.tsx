@@ -22,7 +22,7 @@ import '../styles/Lanyard.css';
 
 const cardGLB = '/images/card.glb';
 const lanyard = '/images/name.png';
-const cardTexture = '/images/photo4.png';
+const cardTexture = '/images/photo5.png';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -193,7 +193,11 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   useFrame((_state, delta) => {
     if (cardGroup.current) {
       const targetScale = hovered ? 2.1 : 2.25;
-      const s = THREE.MathUtils.lerp(cardGroup.current.scale.x, targetScale, 0.1);
+      const s = THREE.MathUtils.lerp(
+        cardGroup.current.scale.x,
+        targetScale,
+        0.1,
+      );
       cardGroup.current.scale.setScalar(s);
       // top 고정: scale 줄어들수록 position.y를 올려서 상단 위치 유지
       cardGroup.current.position.y = -1.2 + 1.125 * (2.25 - s);
