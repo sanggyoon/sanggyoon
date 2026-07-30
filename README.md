@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F766E,50:43C1B3,100:67E8F9&height=250&section=header&text=Sanggyoon%20Kim&fontSize=62&fontColor=FFFFFF&animation=fadeIn&desc=Curiosity%20first%20-%20Build%20it%20-%20Understand%20it&descSize=18&descAlignY=62" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F766E,50:43C1B3,100:67E8F9&height=250&section=header&text=Sanggyoon%20Kim&fontSize=62&fontColor=FFFFFF" />
 
 <a href="https://iam.sanggyoon.com"><img src="https://img.shields.io/badge/Portfolio-iam.sanggyoon.com-0F766E?style=for-the-badge&logo=vercel&logoColor=white" /></a>
 <a href="https://velog.io/@sanggyoon/posts"><img src="https://img.shields.io/badge/Velog-@sanggyoon-20C997?style=for-the-badge&logo=velog&logoColor=white" /></a>
@@ -59,7 +59,7 @@ Route53 헬스체크 기반 자동 페일오버를 구현·검증했고, GitHub 
 
 ---
 
-### 🧠 ABORA — 멀티 AI 에이전트 상호작용 (종합설계 TeamTalk) 🏆 최우수상
+### 🧠 ABORA — 멀티 AI 에이전트 상호작용 (종합설계 TeamTalk)
 
 > `4인 팀 팀장` · 인프라/백엔드 중심 풀스택 · **논문 1편 공저자 등재**
 > [`v1 (프로토타입)`](https://github.com/sanggyoon/202503-ABORA-multi_agent_system_v1) · [`v2 (재설계)`](https://github.com/sanggyoon/202509-ABORA-multi_agent_system_v2)
@@ -120,7 +120,7 @@ Route53 헬스체크 기반 자동 페일오버를 구현·검증했고, GitHub 
 
   <br/>
 
-  <img height="180" src="https://streak-stats.demolab.com/?user=sanggyoon&hide_border=true&background=00000000&ring=14B8A6&fire=F97316&currStreakLabel=14B8A6&sideLabels=808A94&dates=808A94&currStreakNum=808A94&sideNums=808A94&stroke=808A94" />
+  <img height="180" src="https://streak-stats.demolab.com/?user=sanggyoon&hide_border=true&disable_animations=true&background=00000000&ring=14B8A6&fire=F97316&currStreakLabel=14B8A6&sideLabels=808A94&dates=808A94&currStreakNum=808A94&sideNums=808A94&stroke=808A94" />
 
 <br/><br/>
 
