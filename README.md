@@ -118,10 +118,6 @@ Route53 헬스체크 기반 자동 페일오버를 구현·검증했고, GitHub 
     <img height="200" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=sanggyoon&theme=default" />
   </picture>
 
-  <br/>
-
-  <img height="180" src="https://streak-stats.demolab.com/?user=sanggyoon&hide_border=true&disable_animations=true&background=00000000&ring=14B8A6&fire=F97316&currStreakLabel=14B8A6&sideLabels=808A94&dates=808A94&currStreakNum=808A94&sideNums=808A94&stroke=808A94" />
-
 <br/><br/>
 
   <a href="https://www.gitanimals.org/en_US?utm_medium=image&utm_source=sanggyoon&utm_content=line">
