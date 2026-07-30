@@ -48,6 +48,7 @@
 ### ☁️ [Peakly — 카카오 AIaaS 하이브리드 클라우드](https://github.com/sanggyoon/202605_KakaoCloud_AIaaS)
 
 > `4인 팀 팀장` · 인프라 · 프론트 · 백엔드 · DB · ML · DevOps 전 영역 주도
+> ** 🌐 백업된 서비스 운영 중** — [`peakly.sanggyoon.com`](https://peakly.sanggyoon.com)
 
 KakaoCloud VM 5대 위에 **셀프매니지드 k3s**로 서비스를 운영하고, AWS를 **DR 환경**으로 Terraform 코드화했습니다.
 Route53 헬스체크 기반 자동 페일오버를 구현·검증했고, GitHub Actions → GHCR → **Argo CD GitOps**로 선언적 배포/롤백을 구성했습니다.
