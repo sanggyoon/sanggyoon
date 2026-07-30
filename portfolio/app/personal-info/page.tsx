@@ -27,11 +27,7 @@ export default function PersonalInfo() {
         <div className="split-text">
           <div className="kick">About Me · 2026</div>
           <div className="cover-rule" />
-          <h1>
-            호기심부터 시작하는
-            <br />
-            개발자
-          </h1>
+          <h1>호기심부터 시작하는 개발자</h1>
           {/* <p className="sub">
             대학에서 다루지 않는 것도 직접 만들어 보며 배우는 인프라
             개발자입니다.
