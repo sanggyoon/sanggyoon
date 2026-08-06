@@ -41,9 +41,16 @@
   --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 34px rgba(0, 0, 0, .4);
 }
 
+/* phones: the Dock shrinks but stacks a dot row on top of itself, and the
+   iOS home indicator eats a few more pixels below it */
+@media (max-width: 639px) {
+  .deck { --dock-gap: calc(128px + env(safe-area-inset-bottom, 0px)); }
+}
+
 .deck * { box-sizing: border-box; }
 
 .deck {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100dvh;
@@ -66,7 +73,10 @@
   padding: clamp(14px, 2.2vw, 36px);
   /* clear the global floating Dock that overlays the bottom */
   padding-bottom: var(--dock-gap);
-  overflow: auto;
+  /* vertical scroll only — a swipe-in-progress offsets the slide sideways
+     and must not turn into a horizontal scrollbar */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .deck .slide {
   display: none;
@@ -83,6 +93,40 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .deck .slide { animation: none; }
+}
+
+/* ---- touch swipe ----
+   On phones the Dock drops its prev/next arrows and slides are driven by a
+   horizontal swipe instead (see components/deck/SlideDeck.tsx). This hint
+   teaches the gesture once, then fades itself out. */
+.deck .swipe-hint {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--dock-gap) + 2px);
+  z-index: 40;
+  margin: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 5px 13px;
+  backdrop-filter: blur(4px);
+  animation: swipehint 4.6s ease both;
+}
+@media (max-width: 639px) {
+  .deck .swipe-hint { display: block; }
+}
+@keyframes swipehint {
+  0%   { opacity: 0; translate: -50% 6px; }
+  12%  { opacity: 1; translate: -50% 0; }
+  76%  { opacity: 1; translate: -50% 0; }
+  100% { opacity: 0; translate: -50% 0; }
 }
 
 /* ---- shared typography ---- */

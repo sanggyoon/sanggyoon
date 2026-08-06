@@ -205,7 +205,7 @@ export default function Dock({
         }}
         className={`${className} ${panelTheme(
           dark,
-        )} flex h-full w-fit items-center gap-4 rounded-2xl border-2 px-4 backdrop-blur-md transition-colors`}
+        )} flex h-full w-fit items-center gap-2.5 rounded-2xl border-2 px-3 backdrop-blur-md transition-colors sm:gap-4 sm:px-4`}
         role="toolbar"
         aria-label="Application dock"
       >

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   Home,
@@ -14,6 +15,19 @@ import Dock, { DockItemData } from '@/components/Dock';
 import { useDeckTheme } from '@/components/DeckTheme';
 import { useDeckNav } from '@/components/DeckNav';
 
+/** Matches Tailwind's `sm` breakpoint; starts false so SSR renders desktop. */
+function useIsPhone() {
+  const [isPhone, setIsPhone] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)');
+    setIsPhone(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsPhone(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return isPhone;
+}
+
 const navItems = [
   { label: 'HOME', href: '/', icon: <Home size={24} /> },
   { label: 'ABOUT ME', href: '/personal-info', icon: <User size={24} /> },
@@ -27,6 +41,7 @@ export default function DockNav() {
   const router = useRouter();
   const { dark: deckDark } = useDeckTheme();
   const { index, total, go } = useDeckNav();
+  const isPhone = useIsPhone();
 
   // Home ('/') has a dark background and no deck theme toggle, so the dock
   // always reads dark there; deck pages follow the deck's own light/dark toggle.
@@ -45,7 +60,9 @@ export default function DockNav() {
   // Slide controls only make sense on a multi-slide deck page.
   const showDeckNav = pathname !== '/' && total > 1;
 
-  const arrowCls = `flex h-12 w-12 items-center justify-center rounded-xl border-2 shadow-md backdrop-blur-md transition-colors disabled:cursor-default disabled:opacity-35 ${
+  // Phones navigate by swiping the deck (SlideDeck), so the arrows are for
+  // pointer devices only — dropping them also keeps the dock row on screen.
+  const arrowCls = `hidden h-12 w-12 items-center justify-center rounded-xl border-2 shadow-md backdrop-blur-md transition-colors disabled:cursor-default disabled:opacity-35 sm:flex ${
     dark
       ? 'bg-[#141D1B]/60 border-[#28322F] text-[#E8EFEC] enabled:hover:border-[#43C1B3] enabled:hover:text-[#6FD3C7]'
       : 'bg-[#FFFFFF]/70 border-[#DBE2E0] text-[#141C22] enabled:hover:border-[#0F766E] enabled:hover:text-[#0A5952]'
@@ -55,16 +72,20 @@ export default function DockNav() {
   const dotOff = dark ? 'bg-[#3A4744]' : 'bg-[#C4CCC9]';
 
   return (
-    <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center gap-3 pb-3">
+    <div
+      className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center gap-3 pb-3"
+      style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
+    >
       {showDeckNav && (
         <div
-          className={`pointer-events-auto flex items-center gap-1.5 rounded-full border px-3 py-1.5 backdrop-blur-md transition-colors ${
+          className={`pointer-events-auto flex items-center rounded-full border px-1.5 backdrop-blur-md transition-colors ${
             dark
               ? 'border-[#28322F] bg-[#0E1513]/60'
               : 'border-[#DBE2E0] bg-[#F4F6F5]/70'
           }`}
           aria-label="슬라이드 이동"
         >
+          {/* the button is a finger-sized tap target; the dot inside is the mark */}
           {Array.from({ length: total }).map((_, k) => (
             <button
               key={k}
@@ -72,10 +93,14 @@ export default function DockNav() {
               aria-label={`${k + 1}번 슬라이드`}
               aria-current={k === index ? 'true' : undefined}
               onClick={() => go(k)}
-              className={`rounded-full transition-all ${
-                k === index ? `h-2.5 w-2.5 ${dotOn}` : `h-2 w-2 ${dotOff}`
-              }`}
-            />
+              className="grid h-7 w-5 place-items-center"
+            >
+              <span
+                className={`rounded-full transition-all ${
+                  k === index ? `h-2.5 w-2.5 ${dotOn}` : `h-2 w-2 ${dotOff}`
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}
@@ -93,12 +118,14 @@ export default function DockNav() {
           </button>
         )}
 
+        {/* magnification is a pointer affordance — on touch it never fires,
+            so phones get a flat, narrower dock that fits a 360px screen */}
         <Dock
           items={items}
           dark={dark}
-          baseItemSize={58}
-          magnification={80}
-          panelHeight={92}
+          baseItemSize={isPhone ? 44 : 58}
+          magnification={isPhone ? 44 : 80}
+          panelHeight={isPhone ? 68 : 92}
         />
 
         {showDeckNav && (
