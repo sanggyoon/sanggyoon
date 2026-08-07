@@ -8,7 +8,6 @@ export default function Timeline() {
       <div className="eyebrow">
         <span className="sec">Timeline</span>
       </div>
-      <h1 className="head">2023 → 2026</h1>
       <div className="timeline">
         <div className="tl-line">
           <div className="tl">
