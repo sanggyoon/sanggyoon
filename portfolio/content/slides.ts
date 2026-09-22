@@ -17,7 +17,6 @@ export type Slide =
   | {
       kind: 'cover';
       name: string;
-      tagline: string;
       facts: [string, string][];
       photo: Img;
     }
@@ -76,7 +75,6 @@ export const slides: Slide[] = [
   {
     kind: 'cover',
     name: '김상균',
-    tagline: '장애를 근본 원인까지 추적하고, 재발을 자동화하는 개발자',
     facts: [
       ['학력', '홍익대학교 소프트웨어융합학과 · 2026 졸업'],
       ['자격', 'AWS CCP · SQLD · 리눅스마스터 2급 · AICE Basic'],

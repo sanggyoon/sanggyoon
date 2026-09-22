@@ -248,11 +248,6 @@ td:first-child {
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  margin-bottom: 16px;
-}
-.cover .tagline {
-  font-size: 1.25rem;
-  color: var(--muted);
   margin-bottom: 36px;
 }
 .cover .photo {
@@ -619,7 +614,7 @@ div:has(> .flow) > .figure img {
 }
 
 /* ── Mobile ──────────────────────────────────────── */
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   html,
   body {
     font-size: 16px;
@@ -674,6 +669,9 @@ div:has(> .flow) > .figure img {
     overflow: visible;
     padding: 0;
     break-after: page;
+  }
+  .slide:last-of-type {
+    break-after: auto;
   }
   .figure img {
     max-height: 120mm;

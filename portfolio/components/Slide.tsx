@@ -140,7 +140,6 @@ export default function Slide({ slide, first }: { slide: SlideData; first?: bool
         <div className="layout split cover">
           <div>
             <h1 className="name">{slide.name}</h1>
-            <p className="tagline">{slide.tagline}</p>
             <Facts rows={slide.facts} />
           </div>
           <div className="photo">
