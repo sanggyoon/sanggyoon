@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 /**
  * Tab icon, generated at build time — no asset file to keep in sync.
- * The teal matches the deck's --accent (styles/deck.css).
+ * The color matches --accent in app/globals.css.
  */
 export const size = { width: 32, height: 32 };
 export const contentType = 'image/png';
@@ -17,7 +17,7 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#0F766E',
+          background: '#1D4ED8',
           color: '#FFFFFF',
           fontSize: 17,
           fontWeight: 700,
